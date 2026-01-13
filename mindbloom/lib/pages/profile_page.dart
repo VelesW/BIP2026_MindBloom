@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            // 1. Profile Header
+            // Profile Header
             Center(
               child: Stack(
                 children: [
@@ -56,7 +56,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 32),
 
-            // 2. Quick Stats Row
+            // Quick Stats Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -67,7 +67,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 32),
 
-            // 3. Settings List
+            // Settings List
             _buildProfileTile(
               context,
               icon: Icons.notifications_none,
@@ -95,7 +95,7 @@ class ProfilePage extends StatelessWidget {
             // Logout Button
             TextButton(
               onPressed: () {
-                // Add logout logic here
+                // Logout logic
               },
               child: const Text(
                 'Log Out',

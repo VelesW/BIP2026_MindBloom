@@ -13,7 +13,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Provide WellnessHomeBloc here. ThemeBloc is already provided in main.dart
     return BlocProvider(
       create: (context) => WellnessHomeBloc()..add(LoadHomeData()),
       child: _MyHomePageView(title: title),
@@ -61,7 +60,7 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: [
-          // 1. Theme Toggle Icon (Sun/Moon)
+          // Theme Toggle Icon (Sun/Moon)
           BlocBuilder<ThemeBloc, ThemeState>(
             builder: (context, state) {
               return IconButton(
@@ -76,7 +75,7 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
             },
           ),
 
-          // 2. Settings Dropdown
+          // Settings Dropdown
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert, color: Colors.white),
             onSelected: (value) {
@@ -104,7 +103,6 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
       body: BlocBuilder<WellnessHomeBloc, WellnessHomeState>(
         builder: (context, wellnessState) {
           if (wellnessState is WellnessHomeLoaded) {
-            // Watch ThemeState for overlay brightness adjustment
             return BlocBuilder<ThemeBloc, ThemeState>(
               builder: (context, themeState) {
                 return _buildContent(context, wellnessState, themeState.isDarkMode);
@@ -122,7 +120,6 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
 
     return Stack(
       children: [
-        // Background Image with dynamic overlay
         Positioned.fill(
           child: Image.asset(
             state.imageAssetPath,
@@ -197,7 +194,6 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
         ),
         child: Card(
           margin: const EdgeInsets.only(bottom: 16),
-          // Shape and Elevation inherited from CardThemeData in main.dart
           child: ListTile(
             contentPadding: const EdgeInsets.all(12),
             leading: Container(
@@ -212,7 +208,7 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
             subtitle: Text(sub, style: const TextStyle(fontSize: 13)),
             trailing: Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey.shade400),
             onTap: () {
-              // Navigation logic here
+              // Navigation logic
             },
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // Required for BlocProvider and BlocBuilder
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mindbloom/pages/my_homepage.dart';
 import 'package:mindbloom/firebase_options.dart';
 
@@ -11,13 +11,11 @@ import 'bloc/theme/theme_state.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase with options
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(
-    // Providing ThemeBloc at the very top so the whole app can access it
     BlocProvider(
       create: (context) => ThemeBloc(),
       child: const MyApp(),
@@ -38,7 +36,6 @@ class MyApp extends StatelessWidget {
           title: 'MindBloom',
           debugShowCheckedModeBanner: false,
 
-          // themeMode is now driven by the current state of your ThemeBloc
           themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
 
           // Light Theme Configuration
