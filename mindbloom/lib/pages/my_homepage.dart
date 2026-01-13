@@ -1,78 +1,149 @@
 import 'package:flutter/material.dart';
-import 'package:mindbloom/pages/create_ad_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/home/wellness_home_bloc.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => WellnessHomeBloc()..add(LoadHomeData()),
+      child: _MyHomePageView(title: title),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyHomePageView extends StatefulWidget {
+  final String title;
+  const _MyHomePageView({required this.title});
 
-  void _incrementCounter() {
-    Navigator.of(
-       context,
-     ).push(MaterialPageRoute(builder: (_) => const CreateAdPage()));
+  @override
+  State<_MyHomePageView> createState() => _MyHomePageViewState();
+}
+
+class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(widget.title,
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
       ),
+      body: BlocBuilder<WellnessHomeBloc, WellnessHomeState>(
+        builder: (context, state) {
+          if (state is WellnessHomeLoaded) {
+            return _buildContent(context, state, isDarkMode);
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
+  }
 
-      body: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('project_ads')
-                  .orderBy('createdAt', descending: true)
-                  .snapshots(),
+  Widget _buildContent(BuildContext context, WellnessHomeLoaded state, bool isDarkMode) {
+    return Stack(
+      children: [
+        // Background Image with Dark Overlay
+        Positioned.fill(
+          child: Image.asset(
+            state.imageAssetPath,
+            fit: BoxFit.cover,
+            color: Colors.black.withOpacity(isDarkMode ? 0.6 : 0.3),
+            colorBlendMode: BlendMode.darken,
+          ),
+        ),
+        SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Text(
+                  state.greeting,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+                  ),
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    children: [
+                      _buildTile(0, 'Journal', 'Write down your thoughts', Icons.book, Colors.purple.shade200),
+                      _buildTile(1, 'Breath Exercises', 'Calm your mind', Icons.air, Colors.blue.shade200),
+                      _buildTile(2, 'Daily mood', 'How are you feeling?', Icons.face, Colors.orange.shade200),
+                      _buildTile(3, 'Stats', 'Track your progress', Icons.analytics, Colors.green.shade200),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
-              builder: (context, snapshot) {
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                         return const Center(child: CircularProgressIndicator());
-                       }
-
-                       if (snapshot.hasError) {
-                         return Center(child: Text('Błąd: ${snapshot.error}'));
-                       }
-
-                   final docs = snapshot.data?.docs ?? [];
-
-                       if (docs.isEmpty) {
-                         return const Center(child: Text('Brak ogłoszeń'));
-                       }
-
-                       return ListView.builder(
-                          itemCount: docs.length,
-                          itemBuilder: (context, index) {
-                            final data = docs[index].data() as Map<String, dynamic>;
-
-                            return Card(
-                              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                              child: ListTile(
-                                title: Text(data['title'] ?? ''),
-                                subtitle: Text(data['description'] ?? ''),
-                              ),
-                            );
-                          },
-                        );
-              },
-            ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+  Widget _buildTile(int index, String title, String sub, IconData icon, Color iconBg) {
+    return FadeTransition(
+      opacity: _controller.drive(CurveTween(curve: Interval(0.2 + (index * 0.1), 1.0))),
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(12),
+          leading: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(color: iconBg.withOpacity(0.3), borderRadius: BorderRadius.circular(12)),
+            child: Icon(icon, color: iconBg),
+          ),
+          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          subtitle: Text(sub),
+          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          onTap: () {},
+        ),
+      ),
     );
   }
 }
