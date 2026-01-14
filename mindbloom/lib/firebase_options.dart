@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '746552832931',
     projectId: 'mindbloom-a1d34',
     storageBucket: 'mindbloom-a1d34.firebasestorage.app',
+    androidClientId: '746552832931-r5nknftbjum72sa6alhrqu68v3fjfjr5.apps.googleusercontent.com',
+    iosClientId: '746552832931-tjjave51tilphqs880uch2kgmee57qj3.apps.googleusercontent.com',
     iosBundleId: 'com.example.mindbloom',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '746552832931',
     projectId: 'mindbloom-a1d34',
     storageBucket: 'mindbloom-a1d34.firebasestorage.app',
+    androidClientId: '746552832931-r5nknftbjum72sa6alhrqu68v3fjfjr5.apps.googleusercontent.com',
+    iosClientId: '746552832931-tjjave51tilphqs880uch2kgmee57qj3.apps.googleusercontent.com',
     iosBundleId: 'com.example.mindbloom',
   );
 
@@ -85,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'mindbloom-a1d34.firebasestorage.app',
     measurementId: 'G-KZXCYSN96E',
   );
+
 }
