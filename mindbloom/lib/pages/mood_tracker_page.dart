@@ -96,12 +96,15 @@ class _MoodTrackerViewState extends State<_MoodTrackerView> {
           },
           builder: (context, state) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // EMOJI
                 Text(
                   emojiForValue(_moodValue),
                   style: const TextStyle(fontSize: 80),
                 ),
 
+                // SLIDER
                 Slider(
                   value: _moodValue,
                   min: 1,
@@ -115,31 +118,19 @@ class _MoodTrackerViewState extends State<_MoodTrackerView> {
 
                 const SizedBox(height: 20),
 
+                // SAVE MOOD BUTTON
                 ElevatedButton(
                   onPressed: () {
                     context.read<MoodBloc>().add(
-                      SaveMoodEvent(
-                        emotionFromValue(_moodValue), // now sending a String
-                      ),
+                      SaveMoodEvent(emotionFromValue(_moodValue)),
                     );
                   },
-                  child: const Text("Save Mood"),
+                  child: const Text("Save my Mood"),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
 
-                if (state is MoodSaved)
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade50,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(state.affirmation, textAlign: TextAlign.center),
-                  ),
-
-                const Spacer(),
-
+                // LAST MOODS BUTTON (moved here)
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -152,8 +143,46 @@ class _MoodTrackerViewState extends State<_MoodTrackerView> {
                       ),
                     );
                   },
-                  child: const Text("Last Moods"),
+                  child: const Text("See my previous Moods"),
                 ),
+
+                const SizedBox(height: 20),
+
+                // AFFIRMATION CARD
+                if (state is MoodSaved)
+                  Card(
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Affirmation:",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            state.affirmation,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              height: 1.4,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                const Spacer(),
               ],
             );
           },

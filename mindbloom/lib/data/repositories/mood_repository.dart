@@ -20,7 +20,6 @@ class MoodRepository {
       affirmation: affirmation,
       createdAt: DateTime.now(),
     );
-    print("Saving mood: $feeling / $affirmation");
     await remoteDataSource.saveMood(mood);
 
     return mood;

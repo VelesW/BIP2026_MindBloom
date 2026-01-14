@@ -8,7 +8,6 @@ class MoodRemoteDataSource {
 
   /// Save a mood entry to Firestore
   Future<void> saveMood(Mood mood) async {
-    print("Saving mood");
     await firestore.collection('moods').doc(mood.id).set(mood.toMap());
   }
 

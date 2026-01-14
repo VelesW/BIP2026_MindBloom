@@ -8,6 +8,15 @@ class MistralService {
 
   Future<String> generateAffirmation(String feeling) async {
     final url = Uri.parse("https://api.mistral.ai/v1/chat/completions");
+    final styles = [
+      "poetic",
+      "gentle",
+      "motivational",
+      "nature-inspired",
+      "metaphorical",
+      "warm",
+    ];
+    final style = styles[DateTime.now().second % styles.length];
 
     final response = await http.post(
       url,
@@ -25,7 +34,7 @@ class MistralService {
           {
             "role": "user",
             "content":
-                "Give me a short affirmation for someone feeling $feeling.",
+                "Write a $style affirmation for someone feeling $feeling. Keep it under 25 words.",
           },
         ],
         "max_tokens": 50,
