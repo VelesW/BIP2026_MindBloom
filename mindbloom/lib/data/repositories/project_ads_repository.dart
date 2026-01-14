@@ -1,4 +1,4 @@
-import 'package:starseu/data/datasource/project_ads_remote_ds.dart';
+import 'package:mindbloom/data/datasource/project_ads_remote_ds.dart';
 
 import '../models/project_ad.dart';
 

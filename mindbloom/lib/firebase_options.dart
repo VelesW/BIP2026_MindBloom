@@ -41,20 +41,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDPJ86vUk7iReLxQzD952CiKXiaATg-GFg',
-    appId: '1:878688910170:web:84fc6731f0389b8116d163',
-    messagingSenderId: '878688910170',
-    projectId: 'belfort-d347a',
-    authDomain: 'belfort-d347a.firebaseapp.com',
-    storageBucket: 'belfort-d347a.firebasestorage.app',
+    apiKey: 'AIzaSyD41cVSwLVRlSU4eYIZ4lasrw0SlfVKbE0',
+    appId: '1:746552832931:web:1fae81dcbe5654b9582016',
+    messagingSenderId: '746552832931',
+    projectId: 'mindbloom-a1d34',
+    authDomain: 'mindbloom-a1d34.firebaseapp.com',
+    storageBucket: 'mindbloom-a1d34.firebasestorage.app',
+    measurementId: 'G-RVXDCC75J5',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCmsbUOQFG4-9xEzEiT7NtLGrywjDQdunM',
-    appId: '1:878688910170:android:136e0cc3498003af16d163',
-    messagingSenderId: '878688910170',
-    projectId: 'belfort-d347a',
-    storageBucket: 'belfort-d347a.firebasestorage.app',
+    apiKey: 'AIzaSyBSGZeqEqcgCSKKEQKQLNecwRO0nmXyYJA',
+    appId: '1:746552832931:android:a6adc10ee4ced9aa582016',
+    messagingSenderId: '746552832931',
+    projectId: 'mindbloom-a1d34',
+    storageBucket: 'mindbloom-a1d34.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -63,8 +64,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '746552832931',
     projectId: 'mindbloom-a1d34',
     storageBucket: 'mindbloom-a1d34.firebasestorage.app',
-    androidClientId: '746552832931-r5nknftbjum72sa6alhrqu68v3fjfjr5.apps.googleusercontent.com',
-    iosClientId: '746552832931-tjjave51tilphqs880uch2kgmee57qj3.apps.googleusercontent.com',
     iosBundleId: 'com.example.mindbloom',
   );
 
@@ -74,18 +73,16 @@ class DefaultFirebaseOptions {
     messagingSenderId: '746552832931',
     projectId: 'mindbloom-a1d34',
     storageBucket: 'mindbloom-a1d34.firebasestorage.app',
-    androidClientId: '746552832931-r5nknftbjum72sa6alhrqu68v3fjfjr5.apps.googleusercontent.com',
-    iosClientId: '746552832931-tjjave51tilphqs880uch2kgmee57qj3.apps.googleusercontent.com',
     iosBundleId: 'com.example.mindbloom',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDPJ86vUk7iReLxQzD952CiKXiaATg-GFg',
-    appId: '1:878688910170:web:418dcb4333e5ba2716d163',
-    messagingSenderId: '878688910170',
-    projectId: 'belfort-d347a',
-    authDomain: 'belfort-d347a.firebaseapp.com',
-    storageBucket: 'belfort-d347a.firebasestorage.app',
+    apiKey: 'AIzaSyD41cVSwLVRlSU4eYIZ4lasrw0SlfVKbE0',
+    appId: '1:746552832931:web:b20c4cd4b5dd78c4582016',
+    messagingSenderId: '746552832931',
+    projectId: 'mindbloom-a1d34',
+    authDomain: 'mindbloom-a1d34.firebaseapp.com',
+    storageBucket: 'mindbloom-a1d34.firebasestorage.app',
+    measurementId: 'G-KZXCYSN96E',
   );
-
 }

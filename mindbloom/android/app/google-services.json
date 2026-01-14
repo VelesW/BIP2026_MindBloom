@@ -1,51 +1,26 @@
 {
   "project_info": {
-    "project_number": "878688910170",
-    "project_id": "belfort-d347a",
-    "storage_bucket": "belfort-d347a.firebasestorage.app"
+    "project_number": "746552832931",
+    "project_id": "mindbloom-a1d34",
+    "storage_bucket": "mindbloom-a1d34.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:878688910170:android:136e0cc3498003af16d163",
+        "mobilesdk_app_id": "1:746552832931:android:a6adc10ee4ced9aa582016",
         "android_client_info": {
-          "package_name": "com.example.starseu"
+          "package_name": "com.example.mindbloom"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "746552832931-r5nknftbjum72sa6alhrqu68v3fjfjr5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mindbloom",
-            "certificate_hash": "8da46aacc19e266befb9229c2af0f00b58ccbcef"
-          }
-        },
-        {
-          "client_id": "746552832931-pm31aoujq5p110sdj0h9deim6jk5v49i.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCmsbUOQFG4-9xEzEiT7NtLGrywjDQdunM"
+          "current_key": "AIzaSyBSGZeqEqcgCSKKEQKQLNecwRO0nmXyYJA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "746552832931-pm31aoujq5p110sdj0h9deim6jk5v49i.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "746552832931-tjjave51tilphqs880uch2kgmee57qj3.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.mindbloom"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

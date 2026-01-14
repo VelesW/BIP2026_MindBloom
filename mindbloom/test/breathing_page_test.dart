@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:starseu/pages/breathing_page.dart';
+import 'package:mindbloom/pages/breathing_page.dart';
 
 void main() {
   testWidgets('BreathingPage initial state test', (WidgetTester tester) async {
