@@ -12,7 +12,20 @@
           "package_name": "com.example.mindbloom"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "746552832931-r5nknftbjum72sa6alhrqu68v3fjfjr5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mindbloom",
+            "certificate_hash": "8da46aacc19e266befb9229c2af0f00b58ccbcef"
+          }
+        },
+        {
+          "client_id": "746552832931-pm31aoujq5p110sdj0h9deim6jk5v49i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBSGZeqEqcgCSKKEQKQLNecwRO0nmXyYJA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746552832931-pm31aoujq5p110sdj0h9deim6jk5v49i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "746552832931-tjjave51tilphqs880uch2kgmee57qj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mindbloom"
+              }
+            }
+          ]
         }
       }
     }
