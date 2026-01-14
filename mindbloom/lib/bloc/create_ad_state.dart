@@ -15,20 +15,20 @@ class CreateAdState extends Equatable {
     this.errorMessage,
   });
 
-  CreateAdState copyWith({
-      String? title,
-      String? description,
-      CreateAdStatus? status,
-      String? errorMessage,
-    }) {
-      return CreateAdState(
-        title: title ?? this.title,
-        description: description ?? this.description,
-        status: status ?? this.status,
-        errorMessage: errorMessage,
-      );
-    }
-
-    @override
-    List<Object?> get props => [title, description, status, errorMessage];
+CreateAdState copyWith({
+    String? title,
+    String? description,
+    CreateAdStatus? status,
+    String? errorMessage,
+  }) {
+    return CreateAdState(
+      title: title ?? this.title,
+      description: description ?? this.description,
+      status: status ?? this.status,
+      errorMessage: errorMessage,
+    );
   }
+
+  @override
+  List<Object?> get props => [title, description, status, errorMessage];
+}

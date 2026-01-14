@@ -1,15 +1,15 @@
 {
   "project_info": {
-    "project_number": "746552832931",
-    "project_id": "mindbloom-a1d34",
-    "storage_bucket": "mindbloom-a1d34.firebasestorage.app"
+    "project_number": "878688910170",
+    "project_id": "belfort-d347a",
+    "storage_bucket": "belfort-d347a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:746552832931:android:a6adc10ee4ced9aa582016",
+        "mobilesdk_app_id": "1:878688910170:android:136e0cc3498003af16d163",
         "android_client_info": {
-          "package_name": "com.example.mindbloom"
+          "package_name": "com.example.starseu"
         }
       },
       "oauth_client": [
@@ -28,7 +28,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSGZeqEqcgCSKKEQKQLNecwRO0nmXyYJA"
+          "current_key": "AIzaSyCmsbUOQFG4-9xEzEiT7NtLGrywjDQdunM"
         }
       ],
       "services": {

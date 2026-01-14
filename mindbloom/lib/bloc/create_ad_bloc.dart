@@ -51,3 +51,4 @@ class CreateAdBloc extends Bloc<CreateAdEvent, CreateAdState> {
     }
   }
 }
+

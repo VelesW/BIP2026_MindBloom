@@ -31,7 +31,7 @@ class _CreateAdView extends StatelessWidget {
       listener: (context, state) {
         if (state.status == CreateAdStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Dodano ogłoszenie!')),
+            const SnackBar(content: Text('You are Logged in')),
           );
           Navigator.of(context).pop();
         }
@@ -42,18 +42,18 @@ class _CreateAdView extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('ADD ADVERT')),
+        appBar: AppBar(title: const Text('Login')),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               TextField(
-                decoration: const InputDecoration(labelText: 'TITLE'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 onChanged: (v) => context.read<CreateAdBloc>().add(TitleChanged(v)),
               ),
               const SizedBox(height: 12),
               TextField(
-                decoration: const InputDecoration(labelText: 'DESCRIPTION'),
+                decoration: const InputDecoration(labelText: 'Password'),
                 minLines: 3,
                 maxLines: 6,
                 onChanged: (v) => context.read<CreateAdBloc>().add(DescriptionChanged(v)),
@@ -71,12 +71,12 @@ class _CreateAdView extends StatelessWidget {
                           : () {
                               // docelowo: FirebaseAuth.instance.currentUser!.uid
                               context.read<CreateAdBloc>().add(
-                                    const SubmitPressed(authorId: 'demo-user'),
+                                    const SubmitPressed(authorId: 'user-data'),
                                   );
                             },
                       child: isLoading
                           ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                          : const Text('ADD'),
+                          : const Text('login'),
                     ),
                   );
                 },

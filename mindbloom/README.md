@@ -1,4 +1,4 @@
-# mindbloom
+# starseu
 
 A new Flutter project.
 
