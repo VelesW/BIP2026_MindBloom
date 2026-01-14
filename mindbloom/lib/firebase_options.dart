@@ -41,21 +41,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD41cVSwLVRlSU4eYIZ4lasrw0SlfVKbE0',
-    appId: '1:746552832931:web:1fae81dcbe5654b9582016',
-    messagingSenderId: '746552832931',
-    projectId: 'mindbloom-a1d34',
-    authDomain: 'mindbloom-a1d34.firebaseapp.com',
-    storageBucket: 'mindbloom-a1d34.firebasestorage.app',
-    measurementId: 'G-RVXDCC75J5',
+    apiKey: 'AIzaSyDVUEdE3fMMOV-6QP9KRu95XdfA6N_VIGU',
+    appId: '1:770860298975:web:c4c687c599fdc9c807af6a',
+    messagingSenderId: '770860298975',
+    projectId: 'mindbloom-e999c',
+    authDomain: 'mindbloom-e999c.firebaseapp.com',
+    storageBucket: 'mindbloom-e999c.firebasestorage.app',
+    measurementId: 'G-SM9S3N02SH',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBSGZeqEqcgCSKKEQKQLNecwRO0nmXyYJA',
-    appId: '1:746552832931:android:a6adc10ee4ced9aa582016',
-    messagingSenderId: '746552832931',
-    projectId: 'mindbloom-a1d34',
-    storageBucket: 'mindbloom-a1d34.firebasestorage.app',
+    apiKey: 'AIzaSyAgcA-XZcIqbmznVpKUukzqQiECxTrxC6I',
+    appId: '1:770860298975:android:a422587b606b1e6307af6a',
+    messagingSenderId: '770860298975',
+    projectId: 'mindbloom-e999c',
+    storageBucket: 'mindbloom-e999c.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -81,13 +81,13 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyD41cVSwLVRlSU4eYIZ4lasrw0SlfVKbE0',
-    appId: '1:746552832931:web:b20c4cd4b5dd78c4582016',
-    messagingSenderId: '746552832931',
-    projectId: 'mindbloom-a1d34',
-    authDomain: 'mindbloom-a1d34.firebaseapp.com',
-    storageBucket: 'mindbloom-a1d34.firebasestorage.app',
-    measurementId: 'G-KZXCYSN96E',
+    apiKey: 'AIzaSyDVUEdE3fMMOV-6QP9KRu95XdfA6N_VIGU',
+    appId: '1:770860298975:web:d37fdde82a19359b07af6a',
+    messagingSenderId: '770860298975',
+    projectId: 'mindbloom-e999c',
+    authDomain: 'mindbloom-e999c.firebaseapp.com',
+    storageBucket: 'mindbloom-e999c.firebasestorage.app',
+    measurementId: 'G-8R636V9JX8',
   );
 
 }

@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mindbloom/data/datasource/mood_remote_ds.dart';
+import 'package:mindbloom/data/repositories/mood_repository.dart';
 import '../bloc/mood_bloc.dart';
 import '../bloc/mood_event.dart';
 import '../bloc/mood_state.dart';
+import '../services/mistral_service.dart';
+import 'mood_history_page.dart';
 
 class MoodTrackerPage extends StatelessWidget {
   const MoodTrackerPage({super.key});
@@ -10,7 +15,14 @@ class MoodTrackerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => MoodBloc(),
+      create: (_) => MoodBloc(
+        repository: MoodRepository(
+          remoteDataSource: MoodRemoteDataSource(
+            firestore: FirebaseFirestore.instance,
+          ),
+          mistral: MistralService(apiKey: "Rp99KgDxys8ScPPQv38enndUYnosEW9q"),
+        ),
+      ),
       child: const _MoodTrackerView(),
     );
   }
@@ -26,12 +38,46 @@ class _MoodTrackerView extends StatefulWidget {
 class _MoodTrackerViewState extends State<_MoodTrackerView> {
   double _moodValue = 5;
 
-  String _emojiForMood(double value) {
-    if (value <= 2) return "😢";
-    if (value <= 4) return "😕";
-    if (value <= 6) return "😐";
-    if (value <= 8) return "🙂";
-    return "😄";
+  String emotionFromValue(double value) {
+    switch (value.round()) {
+      case 1:
+        return "Very Sad";
+      case 2:
+        return "Sad";
+      case 3:
+        return "Low";
+      case 4:
+        return "Neutral";
+      case 5:
+        return "Good";
+      case 6:
+        return "Happy";
+      case 7:
+        return "Very Happy";
+      default:
+        return "Neutral";
+    }
+  }
+
+  String emojiForValue(double value) {
+    switch (value.round()) {
+      case 1:
+        return "😭";
+      case 2:
+        return "😢";
+      case 3:
+        return "😕";
+      case 4:
+        return "😐";
+      case 5:
+        return "🙂";
+      case 6:
+        return "😄";
+      case 7:
+        return "🤩";
+      default:
+        return "😐";
+    }
   }
 
   @override
@@ -52,16 +98,16 @@ class _MoodTrackerViewState extends State<_MoodTrackerView> {
             return Column(
               children: [
                 Text(
-                  _emojiForMood(_moodValue),
+                  emojiForValue(_moodValue),
                   style: const TextStyle(fontSize: 80),
                 ),
 
                 Slider(
                   value: _moodValue,
-                  min: 0,
-                  max: 10,
-                  divisions: 10,
-                  label: _moodValue.round().toString(),
+                  min: 1,
+                  max: 7,
+                  divisions: 6,
+                  label: emotionFromValue(_moodValue),
                   onChanged: (value) {
                     setState(() => _moodValue = value);
                   },
@@ -72,7 +118,9 @@ class _MoodTrackerViewState extends State<_MoodTrackerView> {
                 ElevatedButton(
                   onPressed: () {
                     context.read<MoodBloc>().add(
-                      SaveMoodEvent(_moodValue.toInt()),
+                      SaveMoodEvent(
+                        emotionFromValue(_moodValue), // now sending a String
+                      ),
                     );
                   },
                   child: const Text("Save Mood"),
@@ -92,11 +140,19 @@ class _MoodTrackerViewState extends State<_MoodTrackerView> {
 
                 const Spacer(),
 
-                TextButton(
+                ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/moodHistory");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider.value(
+                          value: context.read<MoodBloc>(),
+                          child: const MoodHistoryPage(),
+                        ),
+                      ),
+                    );
                   },
-                  child: const Text("View last 10 moods"),
+                  child: const Text("Last Moods"),
                 ),
               ],
             );

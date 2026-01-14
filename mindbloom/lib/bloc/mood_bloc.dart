@@ -1,24 +1,39 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../data/repositories/mood_repository.dart';
 import 'mood_event.dart';
 import 'mood_state.dart';
 
 class MoodBloc extends Bloc<MoodEvent, MoodState> {
-  MoodBloc() : super(MoodInitial()) {
+  final MoodRepository repository;
+
+  MoodBloc({required this.repository}) : super(MoodInitial()) {
     on<SaveMoodEvent>(_onSaveMood);
+    on<LoadLastMoodsEvent>(_onLoadLastMoods);
   }
 
   Future<void> _onSaveMood(SaveMoodEvent event, Emitter<MoodState> emit) async {
     emit(MoodSaving());
 
     try {
-      // TODO: Save to Firestore
-      // TODO: Call Mistral AI
+      final mood = await repository.saveMood(feeling: event.feeling);
 
-      await Future.delayed(const Duration(seconds: 1)); // simulate work
-
-      emit(MoodSaved("Your affirmation will appear here."));
+      emit(MoodSaved(mood.affirmation));
     } catch (e) {
       emit(MoodError("Failed to save mood"));
+    }
+  }
+
+  Future<void> _onLoadLastMoods(
+    LoadLastMoodsEvent event,
+    Emitter<MoodState> emit,
+  ) async {
+    emit(MoodLoading());
+
+    try {
+      final moods = await repository.getLast10Moods();
+      emit(MoodHistoryLoaded(moods));
+    } catch (e) {
+      emit(MoodError("Failed to load moods"));
     }
   }
 }

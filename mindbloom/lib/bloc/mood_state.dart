@@ -1,3 +1,5 @@
+import 'package:mindbloom/data/models/mood.dart';
+
 abstract class MoodState {}
 
 class MoodInitial extends MoodState {}
@@ -12,4 +14,11 @@ class MoodSaved extends MoodState {
 class MoodError extends MoodState {
   final String message;
   MoodError(this.message);
+}
+
+class MoodLoading extends MoodState {}
+
+class MoodHistoryLoaded extends MoodState {
+  final List<Mood> moods;
+  MoodHistoryLoaded(this.moods);
 }
