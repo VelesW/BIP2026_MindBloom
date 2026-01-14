@@ -7,7 +7,8 @@ abstract class OnboardingEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-/// Triggered whenever the user swipes or clicks "Next"
+class CheckOnboardingStatus extends OnboardingEvent {}
+
 class PageChanged extends OnboardingEvent {
   final int index;
 
@@ -17,5 +18,4 @@ class PageChanged extends OnboardingEvent {
   List<Object?> get props => [index];
 }
 
-/// Triggered when the user clicks "Skip" or "Get Started" on the last page
 class OnboardingFinished extends OnboardingEvent {}
