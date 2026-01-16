@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("MindBloom", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.green)),
+                const Text("MindBloom", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 120, 27, 127))),
                 const SizedBox(height: 40),
                 TextField(controller: _emailController, decoration: const InputDecoration(labelText: 'Email', border: OutlineInputBorder())),
                 const SizedBox(height: 16),

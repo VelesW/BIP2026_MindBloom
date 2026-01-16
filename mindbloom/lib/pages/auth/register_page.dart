@@ -66,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       );
                     },
                     child: state is AuthLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
+                        ? const CircularProgressIndicator(color: Color.fromARGB(255, 120, 27, 127))
                         : const Text("Register"),
                   ),
                 ],
