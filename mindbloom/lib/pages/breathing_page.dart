@@ -18,10 +18,10 @@ class _BreathExercisePageState extends State<BreathExercisePage> with SingleTick
   Timer? _timer;
   ExercisePhase _currentPhase = ExercisePhase.start;
   int _secondsRemaining = 0;
-  int _totalRepetitionSeconds = 120; // 2 Minuten Hauptübung
+  int _totalRepetitionSeconds = 120; 
   bool _isStarted = false;
 
-  // Zeitvorgaben laut deiner Beschreibung
+  
   final int _prepTime = 2;
   final int _inhaleTime = 4;
   final int _exhaleTime = 6;
@@ -30,7 +30,7 @@ class _BreathExercisePageState extends State<BreathExercisePage> with SingleTick
   @override
   void initState() {
     super.initState();
-    // Der Controller steuert die Größe des Kreises
+    // controls size of the circle
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(seconds: _inhaleTime),
@@ -60,17 +60,17 @@ class _BreathExercisePageState extends State<BreathExercisePage> with SingleTick
         break;
       case ExercisePhase.preparation:
         _secondsRemaining = _prepTime;
-        _animationController.stop(); // Kein Pulsieren in der Vorbereitung
+        _animationController.stop(); // no pulse during preparation
         break;
       case ExercisePhase.inhale:
         _secondsRemaining = _inhaleTime;
         _animationController.duration = Duration(seconds: _inhaleTime);
-        _animationController.forward(); // Kreis wird größer
+        _animationController.forward(); // circle gets bigger
         break;
       case ExercisePhase.exhale:
         _secondsRemaining = _exhaleTime;
         _animationController.duration = Duration(seconds: _exhaleTime);
-        _animationController.reverse(); // Kreis wird kleiner
+        _animationController.reverse(); // circle gets smaller
         break;
       case ExercisePhase.sensing:
         _secondsRemaining = _sensingTime;
@@ -83,12 +83,12 @@ class _BreathExercisePageState extends State<BreathExercisePage> with SingleTick
         break;
     }
 
-    // Startet den Sekunden-Timer für die aktuelle Phase
+    // start timer for the current phase
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_secondsRemaining > 1) {
           _secondsRemaining--;
-          // Wenn wir in der Hauptphase sind, ziehen wir von der Gesamtzeit (2 Min) ab
+          // 
           if (_currentPhase == ExercisePhase.inhale || _currentPhase == ExercisePhase.exhale) {
             _totalRepetitionSeconds--;
           }
@@ -108,7 +108,7 @@ class _BreathExercisePageState extends State<BreathExercisePage> with SingleTick
     } else if (_currentPhase == ExercisePhase.inhale) {
       _updatePhase(ExercisePhase.exhale);
     } else if (_currentPhase == ExercisePhase.exhale) {
-      // Prüfen, ob die 2 Minuten um sind
+      // check if total time is up
       if (_totalRepetitionSeconds <= 0) {
         _updatePhase(ExercisePhase.sensing);
       } else {
@@ -139,82 +139,114 @@ class _BreathExercisePageState extends State<BreathExercisePage> with SingleTick
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E), // Sehr dunkles Lila
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color.fromARGB(255, 54, 54, 104), Color(0xFF4A148C)], // Lila Verlauf
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const SizedBox(height: 40),
-            Text(
-              _getPhaseText(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 28, color: Colors.white, fontWeight: FontWeight.w300),
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: const Color(0xFF1A1A2E),
+    body: Stack( 
+      children: [
+        Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color.fromARGB(255, 54, 54, 104), Color(0xFF4A148C)],
             ),
-            
-            // Der pulsierende Kreis
-            AnimatedBuilder(
-              animation: _scaleAnimation,
-              builder: (context, child) {
-                return Transform.scale(
-                  scale: _scaleAnimation.value,
-                  child: Container(
-                    width: 250,
-                    height: 250,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.deepPurpleAccent.withOpacity(0.5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.deepPurpleAccent.withOpacity(0.3),
-                          blurRadius: 50,
-                          spreadRadius: 10,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const SizedBox(height: 60), 
+              Text(
+                _getPhaseText(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 28, color: Colors.white, fontWeight: FontWeight.w300),
+              ),
+              
+              // pulsating circle 
+              AnimatedBuilder(
+                animation: _scaleAnimation,
+                builder: (context, child) {
+                  return Transform.scale(
+                    scale: _scaleAnimation.value,
+                    child: Container(
+                      width: 250,
+                      height: 250,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.deepPurpleAccent.withOpacity(0.5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.deepPurpleAccent.withOpacity(0.3),
+                            blurRadius: 50,
+                            spreadRadius: 10,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          '$_secondsRemaining',
+                          style: const TextStyle(fontSize: 70, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        '$_secondsRemaining',
-                        style: const TextStyle(fontSize: 70, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
 
-            // Start Button
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: _isStarted 
-                ? Text(
-                    "Time remaining: ${_totalRepetitionSeconds > 0 ? _totalRepetitionSeconds : 0}s",
-                    style: const TextStyle(color: Colors.white60),
-                  )
-                : ElevatedButton(
-                    onPressed: _startExercise,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurpleAccent,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-                      elevation: 10,
+              // Start Button
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: _isStarted 
+                  ? Text(
+                      "Time remaining: ${_totalRepetitionSeconds > 0 ? _totalRepetitionSeconds : 0}s",
+                      style: const TextStyle(color: Colors.white60),
+                    )
+                  : ElevatedButton(
+                      onPressed: _startExercise,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurpleAccent,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                        elevation: 10,
+                      ),
+                      child: const Text("START", style: TextStyle(fontSize: 20, letterSpacing: 1.5)),
                     ),
-                    child: const Text("START", style: TextStyle(fontSize: 20, letterSpacing: 1.5)),
-                  ),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+
+        // zrück button
+        Positioned(
+          top: 0,
+          left: 0,
+          child: SafeArea( 
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: InkWell(
+                onTap: () => Navigator.of(context).pop(), 
+                borderRadius: BorderRadius.circular(50),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1), 
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white.withOpacity(0.2)),
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
