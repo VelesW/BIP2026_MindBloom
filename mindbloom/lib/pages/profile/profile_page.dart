@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/auth/auth_bloc.dart';
-import '../bloc/auth/auth_event.dart';
-import '../bloc/auth/auth_state.dart';
+import 'package:mindbloom/bloc/auth/auth_bloc.dart';
+import 'package:mindbloom/bloc/auth/auth_event.dart';
+import 'package:mindbloom/bloc/auth/auth_state.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

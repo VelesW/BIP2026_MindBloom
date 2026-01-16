@@ -4,20 +4,17 @@ import '../bloc/home/wellness_home_bloc.dart';
 import '../bloc/theme/theme_bloc.dart';
 import '../bloc/theme/theme_event.dart';
 import '../bloc/theme/theme_state.dart';
-import 'profile_page.dart';
-import 'breathing_page.dart'; 
+import '../bloc/stats/stats_event.dart';
+import '../bloc/stats/stats_state.dart';
+import '../bloc/stats/stats_bloc.dart';
+import '../data/repositories/stats_repository.dart';
+import 'breathing_page.dart';
+import 'profile/profile_page.dart';
+import 'mood/mood_tracker_page.dart';
+import 'stats/stats_page.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -91,7 +88,7 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
             onSelected: (value) {
               if (value == 'profile') {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               }
             },
@@ -218,22 +215,29 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
             subtitle: Text(sub, style: const TextStyle(fontSize: 13)),
             trailing: Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey.shade400),
             onTap: () {
-              // Navigational logic based on index
-              if (index == 1) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BreathExercisePage(),
-                  ),
-                );
-              } else if (index == 0) {
-                //put navigator push here to cennect to journal page
-                print("Journal angeklickt");
+              switch (index) {
+                case 0:
+                  // Navigator.push(context, MaterialPageRoute(builder: (_) => const JournalPage()));
+                  break;
+                case 1:
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const BreathExercisePage()));
+                  break;
+                case 2:
+                  Navigator.push(context, MaterialPageRoute(builder: (_) =>  MoodTrackerPage()));
+                  break;
+                case 3:
+                  Navigator.push(context, MaterialPageRoute(builder: (_) =>  BlocProvider(
+                    create: (context) => StatsBloc(
+                      repository: StatsRepository()
+                    )..add(LoadStats()),
+                    child: const StatsPage(),
+                  )));
+                  break;
               }
-              // ... more pages can be added here
             },
           ),
         ),
       ),
     );
   }
-} 
+}
