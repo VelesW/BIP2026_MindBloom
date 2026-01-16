@@ -7,9 +7,14 @@ import '../bloc/theme/theme_state.dart';
 import '../bloc/stats/stats_event.dart';
 import '../bloc/stats/stats_state.dart';
 import '../bloc/stats/stats_bloc.dart';
+import '../bloc/journal/journal_state.dart';
+import '../bloc/journal/journal_event.dart';
+import '../bloc/journal/journal_bloc.dart';
 import '../data/repositories/stats_repository.dart';
+import '../data/repositories/journal_repository.dart';
 import 'breathing_page.dart';
 import 'profile/profile_page.dart';
+import 'journal/journal_page.dart';
 import 'mood/mood_tracker_page.dart';
 import 'stats/stats_page.dart';
 
@@ -217,7 +222,10 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
             onTap: () {
               switch (index) {
                 case 0:
-                  // Navigator.push(context, MaterialPageRoute(builder: (_) => const JournalPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => BlocProvider(
+                    create: (context) => JournalBloc(JournalRepository()),
+                    child: JournalPage()
+                  )));
                   break;
                 case 1:
                   Navigator.push(context, MaterialPageRoute(builder: (_) => const BreathExercisePage()));
