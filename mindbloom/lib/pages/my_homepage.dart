@@ -4,9 +4,14 @@ import '../bloc/home/wellness_home_bloc.dart';
 import '../bloc/theme/theme_bloc.dart';
 import '../bloc/theme/theme_event.dart';
 import '../bloc/theme/theme_state.dart';
-import 'profile_page.dart';
+import '../bloc/stats/stats_event.dart';
+import '../bloc/stats/stats_state.dart';
+import '../bloc/stats/stats_bloc.dart';
+import '../data/repositories/stats_repository.dart';
 import 'breathing_page.dart';
+import 'profile/profile_page.dart';
 import 'mood/mood_tracker_page.dart';
+import 'stats/stats_page.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
@@ -83,7 +88,7 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
             onSelected: (value) {
               if (value == 'profile') {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               }
             },
@@ -221,7 +226,12 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
                   Navigator.push(context, MaterialPageRoute(builder: (_) =>  MoodTrackerPage()));
                   break;
                 case 3:
-                  // Navigator.push(context, MaterialPageRoute(builder: (_) => const StatsPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) =>  BlocProvider(
+                    create: (context) => StatsBloc(
+                      repository: StatsRepository()
+                    )..add(LoadStats()),
+                    child: const StatsPage(),
+                  )));
                   break;
               }
             },
