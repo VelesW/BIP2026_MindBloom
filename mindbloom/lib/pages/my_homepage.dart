@@ -127,14 +127,19 @@ class _MyHomePageViewState extends State<_MyHomePageView> with SingleTickerProvi
 
     return Stack(
       children: [
-        Positioned.fill(
-          child: Image.asset(
-            state.imageAssetPath,
-            fit: BoxFit.cover,
-            color: Colors.black.withOpacity(isDarkMode ? 0.55 : 0.3),
-            colorBlendMode: BlendMode.darken,
-          ),
-        ),
+    // Background Image
+    Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: Image.asset(
+        state.imageAssetPath,
+        fit: BoxFit.fitWidth, 
+        alignment: Alignment.topCenter,
+        color: const Color.fromARGB(255, 130, 21, 134).withOpacity(isDarkMode ? 0.55 : 0.3),
+        colorBlendMode: BlendMode.darken,
+      ),
+    ),
         SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
