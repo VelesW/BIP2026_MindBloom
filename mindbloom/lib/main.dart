@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const brandSeedColor = Colors.green;
+    const brandSeedColor = Color.fromARGB(255, 175, 76, 165);
 
     // Listen for Theme changes globally
     return BlocBuilder<ThemeBloc, ThemeState>(
